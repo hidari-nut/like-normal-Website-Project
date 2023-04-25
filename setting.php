@@ -15,7 +15,15 @@
 </head>
 
 <body>
+    <?php
+    session_start();
 
+    if (isset($_COOKIE["address-required"])) {
+        $address_required = $_COOKIE["address-required"];
+    } else {
+        $address_required = "No";
+    }
+    ?>
     <form method="POST" action="input.php">
         <h2>Setting for Input page</h2>
 
