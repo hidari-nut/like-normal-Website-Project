@@ -2,8 +2,7 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
 
 <head>
     <meta charset="utf-8">
@@ -72,7 +71,7 @@
     <?php
     if (isset($_POST["address-required"])) {
         $address_required = $_POST["address-required"];
-        setcookie("address-required", $address_required, 2628288);
+        setcookie("address-required", $address_required,time() + 2628288);
     } else {
     }
     ?>
