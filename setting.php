@@ -62,7 +62,11 @@
     </form>
 
     <?php
-        setcookie("address-required", $_POST["address-required"], 2628288)
+    if (isset($_POST["address-required"])) {
+        $address_required = $_POST["address-required"];
+        setcookie("address-required", $address_required, 2628288);
+    } else {
+    }
     ?>
 
     <script src="" async defer></script>

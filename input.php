@@ -17,8 +17,12 @@
         <?php
             session_start();
 
-            echo $_COOKIE['address-required'];
-            echo $_POST['address-required'];
+            if (isset($_POST["address-required"])) {
+                $address_required = $_POST["address-required"];
+                setcookie("address-required", $address_required, time() + 2628288, "/");
+                echo $_COOKIE["address-required"];
+            } else {
+            }
         ?>
     
         <script src="" async defer></script>
