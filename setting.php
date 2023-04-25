@@ -14,15 +14,21 @@
 </head>
 
 <body>
+
     <?php
     session_start();
 
     if (isset($_COOKIE["address-required"])) {
         $address_required = $_COOKIE["address-required"];
+    }
+
+    if (isset($_POST["address-required"])) {
+        $address_required = $_POST["address-required"];
+        setcookie("address-required", $address_required, time() + 2628288);
     } else {
-        $address_required = "No";
     }
     ?>
+    
     <form method="POST" action="input.php">
         <h2>Setting for Input page</h2>
 
@@ -68,13 +74,7 @@
         <input type="submit" value="submit">
     </form>
 
-    <?php
-    if (isset($_POST["address-required"])) {
-        $address_required = $_POST["address-required"];
-        setcookie("address-required", $address_required,time() + 2628288);
-    } else {
-    }
-    ?>
+
 
     <script src="" async defer></script>
 </body>
