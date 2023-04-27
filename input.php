@@ -22,16 +22,48 @@
     error_reporting(E_ALL);
     session_start();
 
-    if (isset($_POST["address-required"])) {
-        $address_required = $_POST["address-required"];
-        setcookie("address-required", $address_required, time() + 2628288, "/");
-        echo $_COOKIE["address-required"];
-    } else {
+    if (isset($_POST["submit"])) {
+        $_SESSION["nrp"] = $_POST["nrp"];
+        $_SESSION["name"] = $_POST["name"];
+        if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
+            $_SESSION["address"] = $_POST["address"];
+        }
+        $_SESSION["ipk"] = $_POST["ipk"];
     }
 
 
     ?>
+    <form method="POST" action="input.php">
 
+        <h2>Input Form</h2>
+
+        <label for="name">NRP:</label><br>
+        <input type="text" id="nrp" name="nrp" placeholder="Your NRP here">
+        <br><br>
+
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Your name here">
+        <br><br>
+
+        <?php
+        if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
+            echo '<label for="address">Address:</label><br>';
+            echo '<input type="text" id="address" name="address" placeholder="Your address here">';
+            echo '<br><br>';
+        }
+        ?>
+
+        <label for="ipk">IPK:</label><br>
+        <input type="text" id="ipk" name="ipk" placeholder="Your IPK here" value="<?php
+        if (isset($_COOKIE["default_ipk"])) {
+            echo $_COOKIE["default_ipk"];
+        }
+        ?>">
+        <br><br>
+
+        <input type="submit" name="submit" value="Submit">
+
+    </form>
     <script src="" async defer></script>
 </body>
 
