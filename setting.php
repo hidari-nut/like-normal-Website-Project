@@ -15,61 +15,156 @@
 </head>
 
 <body>
+    <?php
 
-    <form method="POST" action="input.php">
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
+
+    if (isset($_POST["save"])) {
+        $address_required = $_POST["address_required"];
+        $default_ipk = $_POST["default_ipk"];
+        $display_font_size = $_POST["display_font_size"];
+        $display_font_type = $_POST["display_font_type"];
+        $address_displayed = $_POST["address_displayed"];
+        $ipk_displayed = $_POST["ipk_displayed"];
+
+
+
+
+        setcookie("address_required", $address_required, time() + 60 * 60 * 24 * 30);
+        setcookie("default_ipk", $default_ipk, time() + 60 * 60 * 24 * 30);
+        setcookie("display_font_size", $display_font_size, time() + 60 * 60 * 24 * 30);
+        setcookie("display_font_type", $display_font_type, time() + 60 * 60 * 24 * 30);
+        setcookie("address_displayed", $address_displayed, time() + 60 * 60 * 24 * 30);
+        setcookie("ipk_displayed", $ipk_displayed, time() + 60 * 60 * 24 * 30);
+    }
+
+    ?>
+
+    <form method="POST" action="setting.php">
+
         <h2>Setting for Input page</h2>
 
         <label>Address is required?</label><br>
-        <input type="radio" id="yes-address" name="address-required" value="Yes">
-        <label for="yes-address">Yes</label><br>
-        <input type="radio" id="no-address" name="address-required" value="No">
-        <label for="no-address">No</label><br>
+
+        <input type="radio" id="yes_address" name="address_required" value="Yes" <?php
+        if (isset($_COOKIE["address_required"])) {
+            $address_required = $_COOKIE["address_required"];
+            if ($address_required == "Yes") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="yes_address">Yes</label><br>
+
+        <input type="radio" id="no_address" name="address_required" value="No" <?php
+        if (isset($_COOKIE["address_required"])) {
+            $address_required = $_COOKIE["address_required"];
+            if ($address_required == "No") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="no_address">No</label><br>
         <br>
 
-        <label for="default-ipk">Default Value for IPK:</label><br>
-        <input type="text" id="default-ipk" name="default-ipk" placeholder="Default IPK">
+        <label for="default_ipk">Default Value for IPK:</label><br>
+        <input type="text" id="default_ipk" name="default_ipk" placeholder="Default IPK" value="<?php
+        if (isset($_COOKIE["default_ipk"])) {
+            echo $_COOKIE["default_ipk"];
+        }
+        ?>">
         <br><br>
 
         <h2>Setting for Display page</h2>
 
-        <label for="display-font-size">Display font size:</label><br>
-        <input type="text" id="display-font-size" name="display-font-size" placeholder="Font size">
+        <label for="display_font_size">Display font size:</label><br>
+        <input type="text" id="display_font_size" name="display_font_size" placeholder="Font size" value="<?php
+        if (isset($_COOKIE["display_font_size"])) {
+            echo $_COOKIE["display_font_size"];
+        }
+        ?>">
         <label>px</label>
         <br><br>
 
-        <label for="display-font-type">Display font type:</label><br>
-        <select id="display-font-type" name="display-font-type">
-            <option value="bold">Bold</option>
-            <option value="italic">Italic</option>
-            <option value="underline">Underline</option>
+        <label for="display_font_type">Display font type:</label><br>
+        <select id="display_font_type" name="display_font_type">
+            <option value="bold" <?php
+            if (isset($_COOKIE["display_font_type"])) {
+                if ($_COOKIE["display_font_type"] == "bold") {
+                    echo "selected";
+                }
+            }
+
+            ?>>Bold</option>
+            <option value="italic" <?php
+            if (isset($_COOKIE["display_font_type"])) {
+                if ($_COOKIE["display_font_type"] == "italic") {
+                    echo "selected";
+                }
+            }
+
+            ?>>Italic</option>
+            <option value="underline" <?php
+            if (isset($_COOKIE["display_font_type"])) {
+                if ($_COOKIE["display_font_type"] == "underline") {
+                    echo "selected";
+                }
+            }
+
+            ?>>Underline</option>
         </select>
         <br><br>
 
         <label>Address is displayed?</label><br>
-        <input type="radio" id="yes-address-displayed" name="address-displayed" value="Yes">
-        <label for="yes-address-displayed">Yes</label><br>
-        <input type="radio" id="no-address-displayed" name="address-displayed" value="No">
-        <label for="no-address-displayed">No</label><br>
+        <input type="radio" id="yes_address_displayed" name="address_displayed" value="Yes" <?php
+        if (isset($_COOKIE["address_displayed"])) {
+            $address_displayed = $_COOKIE["address_displayed"];
+            if ($address_displayed == "Yes") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="yes_address_displayed">Yes</label><br>
+        <input type="radio" id="no_address_displayed" name="address_displayed" value="No" <?php
+        if (isset($_COOKIE["address_displayed"])) {
+            $address_displayed = $_COOKIE["address_displayed"];
+            if ($address_displayed == "No") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="no_address_displayed">No</label><br>
         <br>
 
         <label>IPK is displayed?</label><br>
-        <input type="radio" id="yes-ipk-displayed" name="ipk-displayed" value="Yes">
-        <label for="yes-ipk-displayed">Yes</label><br>
-        <input type="radio" id="no-ipk-displayed" name="ipk-displayed" value="No">
-        <label for="no-ipk-displayed">No</label><br>
+        <input type="radio" id="yes_ipk_displayed" name="ipk_displayed" value="Yes" <?php
+        if (isset($_COOKIE["ipk_displayed"])) {
+            $ipk_displayed = $_COOKIE["ipk_displayed"];
+            if ($ipk_displayed == "Yes") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="yes_ipk_displayed">Yes</label><br>
+        <input type="radio" id="no_ipk_displayed" name="ipk_displayed" value="No" <?php
+        if (isset($_COOKIE["ipk_displayed"])) {
+            $ipk_displayed = $_COOKIE["ipk_displayed"];
+            if ($ipk_displayed == "No") {
+                echo 'checked="checked"';
+            }
+        }
+        ?>>
+        <label for="no_ipk_displayed">No</label><br>
         <br>
-        <input type="submit" value="submit">
-    </form>
+        <input type="submit" name="save" value="Save" style="font-size:20px">
 
-    <?php
-    if (isset($_POST["address-required"])) {
-        $address_required = $_POST["address-required"];
-        setcookie("address-required", $address_required, 2628288);
-    } else {
-    }
-    ?>
+        <input type="button" onclick="window.location.href='index.php';" value="Back" style="font-size:20px" />
+    </form>
 
     <script src="" async defer></script>
 </body>
+
 
 </html>
