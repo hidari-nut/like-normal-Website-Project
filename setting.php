@@ -55,7 +55,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="yes_address">Yes</label><br>
 
         <input type="radio" id="no_address" name="address_required" value="No" <?php
@@ -65,7 +65,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="no_address">No</label><br>
         <br>
 
@@ -74,7 +74,7 @@
         if (isset($_COOKIE["default_ipk"])) {
             echo $_COOKIE["default_ipk"];
         }
-        ?>">
+        ?>" required>
         <br><br>
 
         <h2>Setting for Display page</h2>
@@ -84,12 +84,12 @@
         if (isset($_COOKIE["display_font_size"])) {
             echo $_COOKIE["display_font_size"];
         }
-        ?>">
+        ?>" required>
         <label>px</label>
         <br><br>
 
         <label for="display_font_type">Display font type:</label><br>
-        <select id="display_font_type" name="display_font_type">
+        <select id="display_font_type" name="display_font_type" required>
             <option value="bold" <?php
             if (isset($_COOKIE["display_font_type"])) {
                 if ($_COOKIE["display_font_type"] == "bold") {
@@ -125,7 +125,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="yes_address_displayed">Yes</label><br>
         <input type="radio" id="no_address_displayed" name="address_displayed" value="No" <?php
         if (isset($_COOKIE["address_displayed"])) {
@@ -134,7 +134,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="no_address_displayed">No</label><br>
         <br>
 
@@ -146,7 +146,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="yes_ipk_displayed">Yes</label><br>
         <input type="radio" id="no_ipk_displayed" name="ipk_displayed" value="No" <?php
         if (isset($_COOKIE["ipk_displayed"])) {
@@ -155,7 +155,7 @@
                 echo 'checked="checked"';
             }
         }
-        ?>>
+        ?> required>
         <label for="no_ipk_displayed">No</label><br>
         <br>
         <input type="submit" name="save" value="Save" style="font-size:20px">
