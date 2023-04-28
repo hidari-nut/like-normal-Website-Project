@@ -12,6 +12,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="">
+    <?php
+
+    ?>
+
 </head>
 
 <body>
@@ -22,36 +26,70 @@
     error_reporting(E_ALL);
     session_start();
 
+    //The settings fields are all required, so if one of the settings fields are set, all of them should be as well.
+    if (!isset($_COOKIE["address_required"])) {
+        header("Location: setting.php");
+        exit();
+    }
+
     if (isset($_POST["submit"])) {
-        $_SESSION["nrp"] = $_POST["nrp"];
-        $_SESSION["name"] = $_POST["name"];
-        if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
-            $_SESSION["address"] = $_POST["address"];
+        // $_SESSION["nrp"] = $_POST["nrp"];
+        // $_SESSION["name"] = $_POST["name"];
+        // if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
+        //     $_SESSION["address"] = $_POST["address"];
+        // }
+        // $_SESSION["ipk"] = $_POST["ipk"];
+
+        if (!isset($_SESSION["students"])) {
+            $_SESSION["students"] = array();
         }
-        $_SESSION["ipk"] = $_POST["ipk"];
+
+        //The ID of each students are their NRP
+        $student_nrp = $_POST["nrp"];
+        $name = $_POST["name"];
+        if ($_COOKIE["address_required"] == "Yes" && $_POST["address"] != "") {
+            $address = $_POST["address"];
+        }
+        else{
+            $address="Not Entered";
+        }
+        $ipk = $_POST["ipk"];
+        
+
+
+        $_SESSION["students"][$student_nrp] = array("Name" => $name, "Address" => $address, "IPK" => $ipk);
     }
 
 
     ?>
+
     <form method="POST" action="input.php">
 
         <h2>Input Form</h2>
 
         <label for="name">NRP:</label><br>
-        <input type="text" id="nrp" name="nrp" placeholder="Your NRP here">
+        <input type="text" id="nrp" name="nrp" placeholder="Your NRP here" required>
         <br><br>
 
         <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" placeholder="Your name here">
+        <input type="text" id="name" name="name" placeholder="Your name here" required>
         <br><br>
 
-        <?php
+        <!-- <?php
         if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
             echo '<label for="address">Address:</label><br>';
             echo '<input type="text" id="address" name="address" placeholder="Your address here">';
             echo '<br><br>';
         }
-        ?>
+        ?> -->
+
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" placeholder="Your address here" <?php
+            if ($_COOKIE["address_required"] == "Yes") {
+                echo "required";
+            }
+        ?>>
+        <br><br>
 
         <label for="ipk">IPK:</label><br>
         <input type="text" id="ipk" name="ipk" placeholder="Your IPK here" value="<?php
@@ -61,8 +99,9 @@
         ?>">
         <br><br>
 
-        <input type="submit" name="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit" style="font-size:20px">
 
+        <input type="button" onclick="window.location.href='index.php';" value="Back" style="font-size:20px" />
     </form>
     <script src="" async defer></script>
 </body>

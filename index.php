@@ -18,6 +18,8 @@
 
         <form>
             <input type="button" onclick="window.location.href='setting.php';" value="Settings" />
+            <input type="button" onclick="window.location.href='input.php';" value="Input" />
+            <input type="button" onclick="window.location.href='display.php';" value="Display" />
         </form>
         
         
