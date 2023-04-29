@@ -23,6 +23,8 @@
         $students = $_SESSION["students"];
         $font_size = $_COOKIE["display_font_size"];
         $font_type = $_COOKIE["display_font_type"];
+        $address_displayed = $_COOKIE["address_displayed"];
+        $ipk_displayed = $_COOKIE["ipk_displayed"];
 
         foreach ($students as $nrp => $data) {
 
@@ -42,11 +44,16 @@
             echo "Nama: $name";
             echo "<br>";
 
-            echo "Alamat: $address";
-            echo "<br>";
-
-            echo "IPK: $ipk";
-            echo "<br><br>";
+            if ($address_displayed == "Yes") {
+                echo "Alamat: $address";
+                echo "<br>";
+            }
+            
+            if ($ipk_displayed == "Yes") {
+                echo "IPK: $ipk";
+                echo "<br>";
+            }
+            echo "<br>";    
         }
     } else {
         echo "SESSION NOT SET!";

@@ -33,12 +33,6 @@
     }
 
     if (isset($_POST["submit"])) {
-        // $_SESSION["nrp"] = $_POST["nrp"];
-        // $_SESSION["name"] = $_POST["name"];
-        // if (isset($_COOKIE["address_required"]) && $_COOKIE["address_required"] == "Yes") {
-        //     $_SESSION["address"] = $_POST["address"];
-        // }
-        // $_SESSION["ipk"] = $_POST["ipk"];
 
         if (!isset($_SESSION["students"])) {
             $_SESSION["students"] = array();
@@ -47,8 +41,12 @@
         //The ID of each students are their NRP
         $student_nrp = $_POST["nrp"];
         $name = $_POST["name"];
-        if ($_COOKIE["address_required"] == "Yes" && $_POST["address"] != "") {
+        //If required, $_POST would not return empty.
+        if ($_COOKIE["address_required"] == "Yes" || $_POST["address"] != "") {
             $address = $_POST["address"];
+        }
+        else if($_COOKIE["address_required"] == "Yes" && $_POST["address"] == ""){
+            echo "Please reload the page and fill the required fields.";
         }
         else{
             $address="Not Entered";
