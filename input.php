@@ -24,7 +24,10 @@
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
-    session_start();
+
+    if(!isset($_SESSION)){
+        session_start();
+    }
 
     //The settings fields are all required, so if one of the settings fields are set, all of them should be as well.
     if (!isset($_COOKIE["address_required"])) {
